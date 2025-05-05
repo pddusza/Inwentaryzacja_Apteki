@@ -8,13 +8,12 @@ $stmt->execute([$cabinet_id]);
 $cabinet = $stmt->fetch();
 
 // 2) Fetch this cabinet’s meds (sorted by name & expiration)
-$stmt = $pdo->prepare("SELECT cm.*, m.name AS med_name, cm.expiration_date FROM cabinet_medications AS cm JOIN medications AS m ON cm.medication_id = m.id WHERE cm.cabinet_id = ? ORDER BY m.name ASC, cm.expiration_date ASC");
+$stmt = $pdo->prepare("SELECT cm.*, m.name AS med_name, cm.expiration_date FROM cabinet_medications AS cm JOIN medications AS m ON cm.medication_id = m.id WHERE cm.cabinet_id = ? AND cm.quantity > 0 ORDER BY m.name ASC, cm.expiration_date ASC");
 $stmt->execute([$cabinet_id]);
 $medications = $stmt->fetchAll();
 
 // 3) Fetch expired meds for this cabinet
-$expStmt = $pdo->prepare("SELECT m.name, cm.expiration_date FROM cabinet_medications AS cm JOIN medications AS m ON cm.medication_id = m.id WHERE cm.cabinet_id = ? AND cm.expiration_date < CURDATE()
-");
+$expStmt = $pdo->prepare("SELECT m.name, cm.expiration_date FROM cabinet_medications AS cm JOIN medications AS m ON cm.medication_id = m.id WHERE cm.cabinet_id = ? AND cm.expiration_date < CURDATE() AND cm.quantity > 0");
 $expStmt->execute([$cabinet_id]);
 $expired = $expStmt->fetchAll();
 ?>
