@@ -70,7 +70,7 @@ Built with:
 7. **View reports** to monitor inventory history and usage trends. Export CSVs, or print for audits (Unreleased).
 
 ## Dashboard landing page
-![image](https://github.com/user-attachments/assets/5bdd7d0d-cb9f-44bc-8ce8-5985894d9447)
+![image](https://github.com/user-attachments/assets/93aa0d11-cb94-4344-ad33-df2673888494)
 
 ## Simplified File Overview
 
